@@ -15,6 +15,36 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
+            string a = Console.ReadLine();
+            string b = Console.ReadLine();
+            int ai = Int32.Parse(a);
+            int bi = Int32.Parse(b);
+            int result = 0;
+            string oper = Console.ReadLine();
+            if (oper == "+")
+            {
+                result = ai + bi;
+                Console.WriteLine(result);
+            }
+            else if (oper == "-")
+            {
+                result = ai - bi;
+                Console.WriteLine(result);
+            }
+            else if (oper == "*")
+            {
+                result = ai * bi;
+                Console.WriteLine(result);
+            }
+            else if (oper == "/")
+            {
+                result = ai / bi;
+                Console.WriteLine(result);
+            }
+            else
+            {
+                Console.WriteLine(result);
+            }
             /*
              * Pokud se budes chtit na neco zeptat a zrovna budu pomahat jinde, zkus se zeptat ChatGPT ;) - https://chat.openai.com/
              * 
