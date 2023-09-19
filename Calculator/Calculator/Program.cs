@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Net;
+using System.Runtime.Remoting.Lifetime;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,28 +18,57 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-            string a = Console.ReadLine();
-            string b = Console.ReadLine();
-            int ai = Int32.Parse(a);
-            int bi = Int32.Parse(b);
-            int result = 0;
+            Console.WriteLine("Zadej prvni cislo:");
+            string aString = Console.ReadLine();
+            Console.WriteLine("Zadej druhe cislo:");
+            string bString = Console.ReadLine();
+            Console.WriteLine("Zadej mat. operaci: \n(Moznosti operaci: +, -, *, /, ^, sqrt, log)");
             string operation = Console.ReadLine();
+            double a, b;
+
+            while(!double.TryParse(aString, out a) || !double.TryParse(bString, out b))
+            {
+                Console.WriteLine("Nespravny vstup, zadej jeste jednou");
+                Console.WriteLine("Zadej prvni cislo:");
+                aString = Console.ReadLine();
+                Console.WriteLine("Zadej druhe cislo:");
+                bString = Console.ReadLine();
+                Console.WriteLine("Zadej mat. operaci:  \n(Moznosti operaci: +, -, *, /, ^, sqrt, log)");
+                operation = Console.ReadLine();
+            }
+
+            a = double.Parse(aString);
+            b = double.Parse(bString);
+            double result = 0.0f;
+
             switch (operation)
             {
                 case "+":
-                    result = ai + bi;
+                    result = a + b;
                     Console.WriteLine(result);
                     break;
                 case "-":
-                    result = ai - bi;
+                    result = a - b;
                     Console.WriteLine(result);
                     break;
                 case "*":
-                    result = ai * bi;
+                    result = a * b;
                     Console.WriteLine(result);
                     break;
                 case "/":
-                    result = ai / bi;
+                    result = a / b;
+                    Console.WriteLine(result);
+                    break;
+                case "^":
+                    result = Math.Pow(a, b);
+                    Console.WriteLine(result);
+                    break;
+                case "sqrt":
+                    result = Math.Sqrt(a);
+                    Console.WriteLine(result);
+                    break;
+                case "log":
+                    result = Math.Log(a, b);
                     Console.WriteLine(result);
                     break;
                 default:
