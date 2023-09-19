@@ -20,7 +20,30 @@ namespace Calculator
             int ai = Int32.Parse(a);
             int bi = Int32.Parse(b);
             int result = 0;
-            string oper = Console.ReadLine();
+            string operation = Console.ReadLine();
+            switch (operation)
+            {
+                case "+":
+                    result = ai + bi;
+                    Console.WriteLine(result);
+                    break;
+                case "-":
+                    result = ai - bi;
+                    Console.WriteLine(result);
+                    break;
+                case "*":
+                    result = ai * bi;
+                    Console.WriteLine(result);
+                    break;
+                case "/":
+                    result = ai / bi;
+                    Console.WriteLine(result);
+                    break;
+                default:
+                    Console.WriteLine(0);
+                    break;
+            }
+            /*
             if (oper == "+")
             {
                 result = ai + bi;
@@ -44,7 +67,7 @@ namespace Calculator
             else
             {
                 Console.WriteLine(result);
-            }
+            }*/
             /*
              * Pokud se budes chtit na neco zeptat a zrovna budu pomahat jinde, zkus se zeptat ChatGPT ;) - https://chat.openai.com/
              * 
