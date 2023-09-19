@@ -20,10 +20,9 @@ namespace Calculator
         {
             Console.WriteLine("Zadej prvni cislo:");
             string aString = Console.ReadLine();
+
             Console.WriteLine("Zadej druhe cislo:");
             string bString = Console.ReadLine();
-            Console.WriteLine("Zadej mat. operaci: \n(Moznosti operaci: +, -, *, /, ^, sqrt, log)");
-            string operation = Console.ReadLine();
             double a, b;
 
             while(!double.TryParse(aString, out a) || !double.TryParse(bString, out b))
@@ -33,48 +32,56 @@ namespace Calculator
                 aString = Console.ReadLine();
                 Console.WriteLine("Zadej druhe cislo:");
                 bString = Console.ReadLine();
-                Console.WriteLine("Zadej mat. operaci:  \n(Moznosti operaci: +, -, *, /, ^, sqrt, log)");
-                operation = Console.ReadLine();
             }
 
             a = double.Parse(aString);
             b = double.Parse(bString);
             double result = 0.0f;
 
-            switch (operation)
+            Console.WriteLine("Zadej mat. operaci: \n(Moznosti operaci: +, -, *, /, ^, sqrt, log)");
+            bool boo = true; //overuje, zda je mat. operace zadana spravne
+            while(boo)
             {
-                case "+":
-                    result = a + b;
-                    Console.WriteLine(result);
-                    break;
-                case "-":
-                    result = a - b;
-                    Console.WriteLine(result);
-                    break;
-                case "*":
-                    result = a * b;
-                    Console.WriteLine(result);
-                    break;
-                case "/":
-                    result = a / b;
-                    Console.WriteLine(result);
-                    break;
-                case "^":
-                    result = Math.Pow(a, b);
-                    Console.WriteLine(result);
-                    break;
-                case "sqrt":
-                    result = Math.Sqrt(a);
-                    Console.WriteLine(result);
-                    break;
-                case "log":
-                    result = Math.Log(a, b);
-                    Console.WriteLine(result);
-                    break;
-                default:
-                    Console.WriteLine(0);
-                    break;
+                
+                string operation = Console.ReadLine();
+                boo = false;
+                switch (operation)
+                {
+                    case "+":
+                        result = a + b;
+                        Console.WriteLine(result);
+                        break;
+                    case "-":
+                        result = a - b;
+                        Console.WriteLine(result);
+                        break;
+                    case "*":
+                        result = a * b;
+                        Console.WriteLine(result);
+                        break;
+                    case "/":
+                        result = a / b;
+                        Console.WriteLine(result);
+                        break;
+                    case "^":
+                        result = Math.Pow(a, b);
+                        Console.WriteLine(result);
+                        break;
+                    case "sqrt":
+                        result = Math.Sqrt(a);
+                        Console.WriteLine(result);
+                        break;
+                    case "log":
+                        result = Math.Log(a, b);
+                        Console.WriteLine(result);
+                        break;
+                    default:
+                        Console.WriteLine("Nespravne zadana mat. operace, zadej jeste jednou. Moznosti operaci: +, -, *, /, ^, sqrt, log");
+                        boo = true;
+                        break;
+                }
             }
+            
             /*
             if (oper == "+")
             {
