@@ -18,69 +18,88 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Zadej prvni cislo:");
-            string aString = Console.ReadLine();
-
-            Console.WriteLine("Zadej druhe cislo:");
-            string bString = Console.ReadLine();
-            double a, b;
-
-            while(!double.TryParse(aString, out a) || !double.TryParse(bString, out b))
+            Console.WriteLine("Program KALKULACKA.");
+            Console.WriteLine("Vysvetlivky: \n operace ^ je mocnina prvniho cisla o zakladu druhe cislo \n operace root je odmocnina z prvniho cisla o zakladu druhe cislo \n operace log je logaritmus z prvniho cisla o zakladu druhe cislo");
+            bool continues = false;
+            do
             {
-                Console.WriteLine("Nespravny vstup, zadej jeste jednou");
                 Console.WriteLine("Zadej prvni cislo:");
-                aString = Console.ReadLine();
+                string aString = Console.ReadLine();
+
                 Console.WriteLine("Zadej druhe cislo:");
-                bString = Console.ReadLine();
-            }
+                string bString = Console.ReadLine();
+                double a, b;
 
-            a = double.Parse(aString);
-            b = double.Parse(bString);
-            double result = 0.0f;
-
-            Console.WriteLine("Zadej mat. operaci: \n(Moznosti operaci: +, -, *, /, ^, sqrt, log)");
-            bool boo = true; //overuje, zda je mat. operace zadana spravne
-            while(boo)
-            {
-                
-                string operation = Console.ReadLine();
-                boo = false;
-                switch (operation)
+                while (!double.TryParse(aString, out a) || !double.TryParse(bString, out b)) //dokud cisla nejsou zadana spravne, chtej po nem vstup znovu
                 {
-                    case "+":
-                        result = a + b;
-                        Console.WriteLine(result);
-                        break;
-                    case "-":
-                        result = a - b;
-                        Console.WriteLine(result);
-                        break;
-                    case "*":
-                        result = a * b;
-                        Console.WriteLine(result);
-                        break;
-                    case "/":
-                        result = a / b;
-                        Console.WriteLine(result);
-                        break;
-                    case "^":
-                        result = Math.Pow(a, b);
-                        Console.WriteLine(result);
-                        break;
-                    case "sqrt":
-                        result = Math.Sqrt(a);
-                        Console.WriteLine(result);
-                        break;
-                    case "log":
-                        result = Math.Log(a, b);
-                        Console.WriteLine(result);
-                        break;
-                    default:
-                        Console.WriteLine("Nespravne zadana mat. operace, zadej jeste jednou. Moznosti operaci: +, -, *, /, ^, sqrt, log");
-                        boo = true;
-                        break;
+                    Console.WriteLine("Nespravny vstup, zadej jeste jednou");
+                    Console.WriteLine("Zadej prvni cislo:");
+                    aString = Console.ReadLine();
+                    Console.WriteLine("Zadej druhe cislo:");
+                    bString = Console.ReadLine();
+                }
+
+                a = double.Parse(aString);
+                b = double.Parse(bString);
+                double result = 0.0f;
+
+                Console.WriteLine("Zadej mat. operaci: \n(Moznosti operaci: +, -, *, /, ^, root, log)");
+                bool falseOperation = true; //overuje, zda je mat. operace zadana spravne
+                while (falseOperation)
+                {
+
+                    string operation = Console.ReadLine();
+                    falseOperation = false;
+                    switch (operation)
+                    {
+                        case "+":
+                            result = a + b;
+                            Console.WriteLine(result);
+                            break;
+                        case "-":
+                            result = a - b;
+                            Console.WriteLine(result);
+                            break;
+                        case "*":
+                            result = a * b;
+                            Console.WriteLine(result);
+                            break;
+                        case "/":
+                            result = a / b;
+                            Console.WriteLine(result);
+                            break;
+                        case "^":
+                            result = Math.Pow(a, b);
+                            Console.WriteLine(result);
+                            break;
+                        case "root":
+                            result = Math.Pow(a, 1/b);
+                            Console.WriteLine(result);
+                            break;
+                        case "log":
+                            result = Math.Log(a, b);
+                            Console.WriteLine(result);
+                            break;
+                        default:
+                            Console.WriteLine("Nespravne zadana mat. operace, zadej jeste jednou. Moznosti operaci: +, -, *, /, ^, root, log");
+                            falseOperation = true;
+                            break;
+                    }
+
+                    if(falseOperation == false)
+                    {
+                        Console.WriteLine("Chcete pokracovat? Zadejte ANO pro pokracovani, cokoliv jineho program ukonci");
+                        string continueStr = Console.ReadLine();
+                        if (continueStr == "ANO")
+                        {
+                            continues = true;
+                        }
+                    }
+                    
                 }
             }
+            while (continues == true);
+            
             
             /*
             if (oper == "+")
