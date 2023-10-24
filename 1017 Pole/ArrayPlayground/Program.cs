@@ -38,7 +38,7 @@ namespace ArrayPlayground
             Console.WriteLine("prumer je " + average);
 
             //TODO 5: Najdi maximum v poli a vypiš ho do konzole.
-            int max = 0;
+            int max = int.MinValue;
             foreach (int i in a)
             {
                 if(i > max)
@@ -49,7 +49,7 @@ namespace ArrayPlayground
             Console.WriteLine("maximum je " + max);
 
             //TODO 6: Najdi minimum v poli a vypiš ho do konzole.
-            int min = a[0];
+            int min = int.MaxValue;
             foreach (int i in a)
             {
                 if (i < min)
@@ -63,7 +63,6 @@ namespace ArrayPlayground
             Console.WriteLine("Zadejte prvek, jehoz index chcete najit");
             int wantedNum = Int32.Parse(Console.ReadLine());
             int index = -1;
-
             for (int i = 0; i < a.Length; i++)
             {
                 if (a[i] == wantedNum)
@@ -95,10 +94,10 @@ namespace ArrayPlayground
             }
 
             //TODO 10: Vytvoř druhé pole, do kterého zkopíruješ prvky z prvního pole v opačném pořadí.
-            int[] countsRev = new int[10];
-            for(int i = 0; i < counts.Length; i++)
+            int[] aRev = new int[100];
+            for(int i = 0; i < a.Length; i++)
             {
-                countsRev[counts.Length - i - 1] = counts[i];
+                aRev[a.Length - i - 1] = a[i];
             }
             Console.ReadKey();
         }
