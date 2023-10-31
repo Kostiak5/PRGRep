@@ -27,11 +27,14 @@ namespace SearchPlayground
         static int BinarySearch(int[] array, int elementToSearch)
         {
             int low = 0, high = array.Length - 1, mid = 0;
-            while (array[mid] != elementToSearch)
+            int divisions = 0;
+            while (low <= high)
             {
                 mid = (low + high) / 2;
+                divisions++;
                 if(array[mid] == elementToSearch)
                 {
+                    Console.WriteLine("Pocet rozdeleni intervalu: " + divisions);
                     return mid;
                 } 
                 else if (array[mid] > elementToSearch)
@@ -56,6 +59,8 @@ namespace SearchPlayground
              * Až ti bude binary search fungovat, přidej k němu proměnnou, která ti bude počítat, kolikrát jsi musel rozdělit interval, než jsi prvek našel
              * a před returnem ho vypiš uživateli do konzole.
              */
+
+
             return mid;
         }
 
