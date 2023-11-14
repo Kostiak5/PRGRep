@@ -15,7 +15,7 @@ namespace _2D_Array_Playground
 {
     internal class Program
     {
-        static int convertTesting(string inputStr, int upperLimit, int lowerLimit) 
+        static int convertTesting(string inputStr, int upperLimit, int lowerLimit) //funkce pro prevod stringu na int; kontrola, ze uzivatel zadal vstup ve formatu int a ve spravnem rozmezi
         //inputStr = to, co chceme prevest na integer
         //pokud to uloha vyzaduje, zkontrolujeme, zda je int v rozmezi od lowerLimit do upperLimit (vetsinou kontrola, zda je promenna v rozmezi velikosti pole); pokud to uloha nevyzaduje, tuto funkci vyvolame s parametrem upperLimit = -1
         {
@@ -36,7 +36,7 @@ namespace _2D_Array_Playground
             convertedNum = Int32.Parse(inputStr);
             return convertedNum;
         }
-        static void writeArray(int[,] arr, int x, int y)
+        static void writeArray(int[,] arr, int x, int y) //funkce pro vypis matice
         {
             for (int i = 0; i < x; i++)
             {
@@ -49,7 +49,7 @@ namespace _2D_Array_Playground
             return;
         }
 
-        static int[,] fillArray(int[,] arr, int x, int y, int fillMethod)
+        static int[,] fillArray(int[,] arr, int x, int y, int fillMethod) //funkce pro vyplneni matice cisly
         {
             Random rd = new Random();
 
@@ -68,7 +68,7 @@ namespace _2D_Array_Playground
             return arr;
         }
 
-        static int[,] createSecondArray(int[,] arr, int x, int yDefault, bool multiplication)
+        static int[,] createSecondArray(int[,] arr, int x, int yDefault, bool multiplication) //funkce pro nektere operace, pri kterych je potreba vytvorit druhou matici
         {
             int y = yDefault;
             //v pripade scitani a odcitani musi byt pocet radku a sloupcu obou matic identicky; v pripade nasobeni muze uzivatel libovolne nastavit pocet sloupcu nove matice
@@ -164,7 +164,7 @@ namespace _2D_Array_Playground
             return arr;
         }
 
-        static int[,] swapDiagonal(int[,] arr, int x, int y, bool mainD)
+        static int[,] swapDiagonal(int[,] arr, int x, int y, bool mainD) //funkce pro prohozeni prvku na hlavni nebo vedlejsi diagonale
         {
             if(x != y)
             {
@@ -195,7 +195,7 @@ namespace _2D_Array_Playground
             return arr;
         }
 
-        static int[,] multiplyByNumber(int[,] arr, int x, int y)
+        static int[,] multiplyByNumber(int[,] arr, int x, int y) //funkce pro nasobeni matice cislem
         {
             Console.WriteLine("Pokud chces vynasobit cislem pouze urcity radek, zadej 1.");
             Console.WriteLine("Pokud chces vynasobit cislem pouze urcity sloupec, zadej 2.");
@@ -327,7 +327,7 @@ namespace _2D_Array_Playground
             return transArr;
         }
 
-        static void sortArray(int[,] arr, int x, int y)
+        static void sortArray(int[,] arr, int x, int y) //funkce pro serazeni a vypis prvku od nejvetsiho po nejmensi
         {
             int sortArrSize = x * y;
             int[] sortArr = new int[sortArrSize];
@@ -351,7 +351,8 @@ namespace _2D_Array_Playground
             Console.Write("\n");
         }
 
-        static void getMaxSum(int[,] arr, int x, int y, bool getColumn) //getColumn = true => hledame sloupec; getColumn = false => hledame radek
+        static void getMaxAverage(int[,] arr, int x, int y, bool getColumn) //funkce pro hledani radku nebo sloupce s maximalnim aritm. prumerem
+        //getColumn = true => hledame sloupec; getColumn = false => hledame radek
         {
             int maxSum = 0, maxSumIndex = 0;
             for(int i = 0; i < (getColumn ? y : x); i++)
@@ -462,10 +463,10 @@ namespace _2D_Array_Playground
                         sortArray(arr, x, y);
                         break;
                     case 12:
-                        getMaxSum(arr, x, y, false);
+                        getMaxAverage(arr, x, y, false);
                         break;
                     case 13:
-                        getMaxSum(arr, x, y, true);
+                        getMaxAverage(arr, x, y, true);
                         break;
 
                 }
