@@ -10,6 +10,7 @@ using System.Threading.Tasks;
  * Extended by students.
  */
 
+
 namespace _2D_Array_Playground
 {
     internal class Program
@@ -83,10 +84,9 @@ namespace _2D_Array_Playground
             Console.WriteLine("Zadej cokoliv jineho, pokud chces matici naplnit za sebou jdoucimi cisly pocinaje jednickou.");
             int[,] secondArr = new int[x, y];
             string fillMethod = Console.ReadLine();
-            int fillMethodInt = 0;
 
             Console.WriteLine("Nove pole: ");
-            if (Int32.TryParse(fillMethod, out fillMethodInt) && Int32.Parse(fillMethod) == 1)
+            if (fillMethod == "1")
                 fillArray(secondArr, x, y, 1);
             else
                 fillArray(secondArr, x, y, 2);
@@ -197,17 +197,46 @@ namespace _2D_Array_Playground
 
         static int[,] multiplyByNumber(int[,] arr, int x, int y)
         {
-            Console.WriteLine("Zadej cislo, kterym chces celou matici vynasobit.");
+            Console.WriteLine("Pokud chces vynasobit cislem pouze urcity radek, zadej 1.");
+            Console.WriteLine("Pokud chces vynasobit cislem pouze urcity sloupec, zadej 2.");
+            Console.WriteLine("Pokud chces vynasobit cislem celou matici, zadej cokoliv jineho.");
+            string optionInput = Console.ReadLine();            
+
+            Console.WriteLine("Zadej cislo, kterym budes nasobit.");
             string multiplierInput = Console.ReadLine();
             int multiplier = convertTesting(multiplierInput, -1);
 
-            for (int i = 0; i < x; i++)
+            if (optionInput == "1")
             {
-                for (int j = 0; j < y; j++)
+                Console.WriteLine("Zadej poradi radku, ktery chces vynasobit timto cislem. Cisluje se od nuly (prvni radek = 0).");
+                string rowInput = Console.ReadLine();
+                int row = convertTesting(rowInput, x);
+                for (int i = 0; i < y; i++)
                 {
-                    arr[i, j] *= multiplier;
+                    arr[row, i] *= multiplier;
                 }
             }
+            else if (optionInput == "2")
+            {
+                Console.WriteLine("Zadej poradi sloupce, ktery chces vynasobit timto cislem. Cisluje se od nuly (prvni radek = 1).");
+                string columnInput = Console.ReadLine();
+                int column = convertTesting(columnInput, y);
+                for (int i = 0; i < x; i++)
+                {
+                    arr[i, column] *= multiplier;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < x; i++)
+                {
+                    for (int j = 0; j < y; j++)
+                    {
+                        arr[i, j] *= multiplier;
+                    }
+                }
+            }
+
 
             Console.WriteLine("Vysledek: ");
             writeArray(arr, x, y);
@@ -291,13 +320,64 @@ namespace _2D_Array_Playground
 
             Console.WriteLine("Vysledek: ");
             writeArray(transArr, y, x);
-            Console.WriteLine("Zadej ANO, pokud chces dal pocitat s touto vyslednou matici. Cokoliv jineho bude znamenat, ze dale budes pocitat znovu s puvodni matici.");
-            if (Console.ReadLine() == "ANO")
-                return transArr;
+            Console.WriteLine("Zadej 0, pokud chces dal pocitat s puvodni matici. Cokoliv jineho bude znamenat, ze dale budes pocitat znovu s puvodni matici.");
+            if (Console.ReadLine() == "0")
+                return arr;
 
-            return arr;
+            return transArr;
         }
 
+        static void sortArray(int[,] arr, int x, int y)
+        {
+            int sortArrSize = x * y;
+            int[] sortArr = new int[sortArrSize];
+            Console.WriteLine(sortArrSize);
+            for(int i = 0; i < x; i++)
+            {
+                for(int j = 0;j < y; j++)
+                {
+                    Console.WriteLine(i * x + j);
+                    sortArr[i * y + j] = arr[i, j];
+                }
+            }
+
+            Array.Sort(sortArr);
+            Array.Reverse(sortArr);
+            Console.WriteLine("Vysledne poradi - prvky od nejvetsiho k nejmensimu: ");
+            for (int i = 0; i < x * y; i++)
+            {
+                Console.Write(sortArr[i] + " ");
+            }
+            Console.Write("\n");
+        }
+
+        static void getMaxSum(int[,] arr, int x, int y, bool getColumn) //getColumn = true => hledame sloupec; getColumn = false => hledame radek
+        {
+            int maxSum = 0, maxSumIndex = 0;
+            for(int i = 0; i < (getColumn ? y : x); i++)
+            {
+                int currentSum = 0;
+                for(int j = 0; j < (getColumn ? x : y); j++)
+                {
+                    Console.WriteLine(i);
+                    currentSum += (getColumn ? arr[j, i] : arr[i, j]); //pokud chci sloupec, getColumn je true a promenna i oznacuje sloupce, j oznacuje radky; v pripade getColumn = false hledame radek, a proto promenne i a j jsou prohozene
+                }
+                if(currentSum > maxSum)
+                {
+                    maxSum = currentSum;
+                    maxSumIndex = i;
+                }
+            }
+             
+            if(getColumn)
+            {
+                Console.WriteLine("Nejvetsi aritmeticky prumer ma sloupec " + maxSumIndex + " a hodnota prumeru je zaokrouhlene " + (maxSum / x));
+            } else
+            {
+                Console.WriteLine("Nejvetsi aritmeticky prumer ma radek " + maxSumIndex + " a hodnota prumeru je zaokrouhlene " + (maxSum / y));
+            }
+            return;
+        }
         static void Main(string[] args)
         {
             Console.WriteLine("Zadej pocet radku v matici: ");
@@ -313,27 +393,35 @@ namespace _2D_Array_Playground
             Console.WriteLine("Zadej 1, pokud chces matici naplnit nahodnymi cisly.");
             Console.WriteLine("Zadej cokoliv jineho, pokud chces matici naplnit za sebou jdoucimi cisly pocinaje jednickou.");
             string fillMethod = Console.ReadLine(); //fillMethod je 1 => cisla nahodna, fillMethod neni 1 => cisla od 1 do x*y
-            int fillMethodInt = 0;
-            if (Int32.TryParse(fillMethod, out fillMethodInt) && Int32.Parse(fillMethod) == 1)
+            if (fillMethod == "1")
                 fillArray(arr, x, y, 1);
             else
                 fillArray(arr, x, y, 2);
 
             do
             {
+                Console.WriteLine("Zadej cislo operace kterou chces provest.");
                 Console.WriteLine("0 pro transpozici matice");
                 Console.WriteLine("1 pro prohozeni prvku, 2 pro prohozeni radku, 3 pro prohozeni sloupcu");
                 Console.WriteLine("4 pro otoceni poradi prvku po hl. diagonale, 5 po vedl. diagonale");
                 Console.WriteLine("6 pro vynasobeni matice cislem, 7 pro secteni dvou matic, 8 pro odecteni dvou matic, 9 pro nasobeni dvou matic");
+                Console.WriteLine("10 pro vypis vsech cisel od nejvetsiho po nejmensi");
+                Console.WriteLine("11 pro nalezeni radku, ktery ma nejvetsi aritmeticky prumer vsech cisel v danem radku");
+                Console.WriteLine("12 pro nalezeni sloupce, ktery ma nejvetsi aritmeticky prumer vsech cisel v danem sloupci");
 
-                Console.WriteLine("Zadej cislo operace kterou chces provest.");
                 string operationInput = Console.ReadLine();
-                int operation = convertTesting(operationInput, 10); //overujeme, zda uzivatel zadal platne cislo operace
+                int operation = convertTesting(operationInput, 13); //overujeme, zda uzivatel zadal platne cislo operace
 
                 switch (operation)
                 {
                     case 0:
                         arr = transposition(arr, x, y);
+                        if(arr.GetLength(0) != x)
+                        {
+                            int xTemp = x;
+                            x = y; 
+                            y = xTemp;
+                        }
                         break;
                     case 1:
                         arr = swapElement(arr, x, y);
@@ -368,11 +456,21 @@ namespace _2D_Array_Playground
                         secondArr = createSecondArray(arr, x, y, true);
                         arr = multiplyArrays(arr, secondArr, x, secondArr.GetLength(1)); //rozmery nove matice jsou x = pocet radku prvni matice a y = pocet sloupcu druhe matice
                         break;
+                    case 10:
+                        sortArray(arr, x, y);
+                        break;
+                    case 11:
+                        getMaxSum(arr, x, y, false);
+                        break;
+                    case 12:
+                        getMaxSum(arr, x, y, true);
+                        break;
+
                 }
 
-                Console.WriteLine("Zadej ANO (a pote zmackni Enter) pro ukonceni programu, pokud zadas cokoliv jineho, budes moct pokracovat v provadeni operaci s matici.");
+                Console.WriteLine("Zadej END (a pote zmackni Enter) pro ukonceni programu, pokud zadas cokoliv jineho, budes moct pokracovat v provadeni operaci s matici.");
             }
-            while (Console.ReadLine() != "ANO");
+            while (Console.ReadLine() != "END");
             Console.ReadKey();
         }
     }
