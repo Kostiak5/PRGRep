@@ -400,13 +400,18 @@ namespace ClassPlayground
 
         static double reform(List<Group> groups, double budget)
         {
-
+            
             Console.WriteLine("\nTeď můžete provést jednu z těchto reforem:\n");
             Console.Write(" * (1) Zvýšení nebo snížení DPH\r\n * (2) Zvýšení nebo snížení důchodů\r\n * (3) Zastropování cen\r\n * (4) Zvýšení nebo snížení výdajů na armádu\r\n * (5) Zavedení povinné základní vojenské služby\r\n * (6) Rozšíření nebo snížení práv policie\r\n * (7) Legalizace hazardních her\r\n * (8) Legalizace lehkých drog\r\n * (9) Zavedení trestu smrti\r\n * (10) Dotace na elektroauta\r\n * (11) Zavádění nebo rušení oddělených autobusových pruhů\r\n * (12) Zvýšení nebo snížení poplatku za parkování ve městě\r\n * (13) Výstavba a rozšíření dálnic\r\n * (14) Podpora recyklace\r\n * (15) Likvidace jaderných elektráren\r\n * (16) Dotace na lokální výrobky a potraviny\r\n * (17) Vstup do zahraniční aliance\r\n * (18) Zavedení genderových kvót\r\n * (19) Uzákonění stejnopohlavních sňatků\r\n * (20) Příspěvek na dítě\r\n");
             Console.WriteLine("\nReformy můžou mít vliv na popularitu, zastoupení nebo volební účast různých volebních skupin.\n");
             Console.WriteLine("Pokud chcete jakoukoliv z nich provést, zadejte odpovídající číslo. Pokud ne, zadejte cokoliv jiného a zmáčkněte Enter.");
             string inputReformStr = Console.ReadLine(); //number of the reform chosen by player
-            budget = reformList(convertTesting(inputReformStr, 1, 20), groups, budget); 
+            int convertedNum;
+            if (Int32.TryParse(inputReformStr, out convertedNum) && Int32.Parse(inputReformStr) <= 20 && Int32.Parse(inputReformStr) >= 0)
+            {
+                convertedNum = Int32.Parse(inputReformStr);
+                budget = reformList(convertedNum, groups, budget);
+            }
 
 
             return budget; //returning budget because it can be affected by reforms
