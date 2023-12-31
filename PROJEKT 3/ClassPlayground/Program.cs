@@ -80,8 +80,8 @@ namespace ClassPlayground
 
         static double reformList(double refNum, List<Group> groups, double budget)
         {
-            string changeInputStr;
-            double change;
+            string changeInputStr; //used for some reforms, where the scale of reform is set by the player (-100 to 100 or 1 to 100)
+            double change; //converted changeInputStr
 
             switch(refNum)
             {
@@ -405,7 +405,7 @@ namespace ClassPlayground
             Console.Write(" * (1) Zvýšení nebo snížení DPH\r\n * (2) Zvýšení nebo snížení důchodů\r\n * (3) Zastropování cen\r\n * (4) Zvýšení nebo snížení výdajů na armádu\r\n * (5) Zavedení povinné základní vojenské služby\r\n * (6) Rozšíření nebo snížení práv policie\r\n * (7) Legalizace hazardních her\r\n * (8) Legalizace lehkých drog\r\n * (9) Zavedení trestu smrti\r\n * (10) Dotace na elektroauta\r\n * (11) Zavádění nebo rušení oddělených autobusových pruhů\r\n * (12) Zvýšení nebo snížení poplatku za parkování ve městě\r\n * (13) Výstavba a rozšíření dálnic\r\n * (14) Podpora recyklace\r\n * (15) Likvidace jaderných elektráren\r\n * (16) Dotace na lokální výrobky a potraviny\r\n * (17) Vstup do zahraniční aliance\r\n * (18) Zavedení genderových kvót\r\n * (19) Uzákonění stejnopohlavních sňatků\r\n * (20) Příspěvek na dítě\r\n");
             Console.WriteLine("\nReformy můžou mít vliv na popularitu, zastoupení nebo volební účast různých volebních skupin.\n");
             Console.WriteLine("Pokud chcete jakoukoliv z nich provést, zadejte odpovídající číslo. Pokud ne, zadejte cokoliv jiného a zmáčkněte Enter.");
-            string inputReformStr = Console.ReadLine();
+            string inputReformStr = Console.ReadLine(); //number of the reform chosen by player
             budget = reformList(convertTesting(inputReformStr, 1, 20), groups, budget); 
 
 
@@ -543,14 +543,14 @@ namespace ClassPlayground
             {
                 case 1:
                     Console.WriteLine("Naše země v poslední době čelí narůstajícímu přílivu migrantů. Je podle Vás správným řešením zavedení přísné kontroly na hranicích?");
-                    if (interviewReadKey())
+                    if (interviewReadKey()) //function returns true if player pressed A
                     {
                         groups[5].support += 20;
                         groups[4].support -= 20;
                         groups[3].support += 15;
                         groups[2].support -= 15;
                     }
-                    else
+                    else //if player pressed N
                     {
                         groups[4].support += 20;
                         groups[5].support -= 20;
@@ -866,7 +866,7 @@ namespace ClassPlayground
                     report(groups, budget);
                     Console.Clear();
 
-                    budget = reform(groups, budget);
+                    budget = reform(groups, budget); //REFORM
                     Console.Clear();
 
                     if (i % 2 == 1) //random event happens every 2nd year 
@@ -888,7 +888,7 @@ namespace ClassPlayground
                         } while (eventAlreadyUsed == true);
 
                         usedEvents.Add(eventRndNum);
-                        budget = events(groups, budget, eventRndNum);
+                        budget = events(groups, budget, eventRndNum); //RANDOM EVENT
                         Console.Clear();
                     }
                     
@@ -909,18 +909,12 @@ namespace ClassPlayground
                     } while (interviewAlreadyUsed == true);
 
                     usedInterviews.Add(interviewRndNum);
-                    interview(groups, interviewRndNum);
+                    interview(groups, interviewRndNum); //INTERVIEW QUESTION
                     Console.Clear();
-
-                    //Console.ReadKey();
-
                 }
                 electPeriod++;
             } while (vote(groups)); //while player wins the vote, continue with the next electoral cycle
-
         }
-  
-
     }
 }
 
