@@ -58,11 +58,10 @@ namespace DFS
          */
         static void DFSRecursion(BinaryTree graph, int target, Node current) 
         {
-            Console.WriteLine("CI " + current.index);
+            Console.WriteLine("Current node " + current.index);
             if(current.index == target)
             {
                 Console.WriteLine(current.index);
-                List<int> result = new List<int>();
                 return;
             }
 
