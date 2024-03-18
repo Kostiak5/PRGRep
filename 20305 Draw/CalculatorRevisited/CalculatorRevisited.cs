@@ -8,56 +8,42 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-/*
- * Dnes bude vasim ukolem vytvorit formularovou reprezentaci kalkulacky. Priblizny vzhled si nakreslime na tabuli
- * (Pokud jsem to nenakreslil, pripomente mi to prosim!)
- * Inspirujte se kalkulackou ve Windows.
- * Pozadovane prvky/funkcionality:
- * - Tlacitka pro kazde z cisel 0-9
- * - Tlacitka pro operace +, -, *, a /
- * - Tlacitko pro = (vypsani vysledku)
- * - Textbox, do ktereho se propisou cisla/operace pri stisku jejich tlacitek
- * - Textbox s vysledkem operace (mozne sloucit s predeslym, nechavam na vas)
- * - Tlacitko pro vymazani textu v textboxu s cisly a operaci
- * 
- * Volitelne prvky/funkcionality:
- * - Tlacitko pro mazani cisel a operaci v textboxu zprava vzdy po jednom znaku
- * - Pokud mam vypsany vysledek a hned po tom stisknu tlacitko nejake operace, vysledek se vezme jako prvni cislo a
- *   rovnou mohu po zadani operace zadat druhe cislo
- * - Moznost ulozeni vysledku do nekolika preddefinovanych labelu/neinteraktivnich textboxu (treba kombinaci comboboxu a tlacitka, kde
- *   v comboboxu vyberu do ktereho labelu/textboxu se mi to ulozi a tlacitkem provedu ulozeni)
- *   + pridat tlacitko pro kazdy label/neint. textbox, kterym ulozeny vysledek pouziju jako cislo do vypoctu
- * - Pridani mocnin/odmocnin atd. (napr. pomoci dalsich tlacitek, ktere rovnou misto daneho cisla daji jeho (popr. zaokrouhlenou) odmocninu apod.)
- * - Cokoliv dalsiho vas napadne! :)
- * 
- * Snazte se o to, aby byla kalkulacka v ramci moznosti hezka, a aby bylo jeji ovladani intuitivni a aby mel kazdy prvek v okne dobre vyuziti
- */
 
 namespace CalculatorRevisited
 {
     public partial class CalculatorRevisited : Form
     {
         Graphics graphics;
-        int x = -1, y = -1;
+        Bitmap bitmap;
+        int x = -1, y = -1, x2 = -1, y2 = -1, xSt = -1, ySt = -1;
+        int drawingMode = 1;
         bool move = false;
-        Pen pen;
+        Pen pen, eraser;
         public CalculatorRevisited()
         {
             InitializeComponent();
-            graphics = panel1.CreateGraphics();
+            this.Width = 900;
+            this.Height = 900;
+            bitmap = new Bitmap(box.Width, box.Height);
+            graphics = Graphics.FromImage(bitmap);
+            graphics.Clear(Color.White);
+            box.Image = bitmap;
+
             graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
             pen = new Pen(Color.Black, 5);
+            pen.StartCap = pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+
+            eraser = new Pen(Color.White, 10); //eraser is always 2x thicker than the ormal pen as it's more comfortable
+            eraser.StartCap = eraser.EndCap = System.Drawing.Drawing2D.LineCap.Round;
         }
 
         private void CalculatorRevisited_Paint(object sender, PaintEventArgs e)
         {
-            graphics.DrawLine(Pens.Red, 10, 10, 100, 100);
         }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void CalculatorRevisited_Load(object sender, EventArgs e)
         {
-            //graphics = e.Graphics;
-            // graphics.DrawLine(Pens.Red, 10, 10, 100, 100);
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -71,39 +57,240 @@ namespace CalculatorRevisited
             pen.Color = p.BackColor;
         }
 
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            PictureBox p = (PictureBox)sender;
+            pen.Color = p.BackColor;
+        }
+
+        private void pictureBox10_Click(object sender, EventArgs e)
+        {
+            PictureBox p = (PictureBox)sender;
+            pen.Color = p.BackColor;
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            PictureBox p = (PictureBox)sender;
+            pen.Color = p.BackColor;
+        }
+
+        private void pictureBox8_Click(object sender, EventArgs e)
+        {
+            PictureBox p = (PictureBox)sender;
+            pen.Color = p.BackColor;
+        }
+
+        private void pictureBox5_Click(object sender, EventArgs e)
+        {
+            PictureBox p = (PictureBox)sender;
+            pen.Color = p.BackColor;
+        }
+
+        private void pictureBox9_Click(object sender, EventArgs e)
+        {
+            PictureBox p = (PictureBox)sender;
+            pen.Color = p.BackColor;
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+            PictureBox p = (PictureBox)sender;
+            pen.Color = p.BackColor;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            drawingMode = 1;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            drawingMode = 2;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            drawingMode = 3;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            drawingMode = 4;
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            pen.Width = trackBar1.Value;
+            eraser.Width = trackBar1.Value * 2;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            bitmap = new Bitmap(box.Width, box.Height);
+            graphics = Graphics.FromImage(bitmap);
+            graphics.Clear(Color.White);
+            box.Image = bitmap;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            drawingMode = 5;
+        }
+
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             PictureBox p = (PictureBox)sender;
             pen.Color = p.BackColor;
         }
-        private void panel1_MouseMove(object sender, MouseEventArgs e)
+
+        private void pictureBox4_MouseDown(object sender, MouseEventArgs e)
         {
-            if(move && x != -1 && y != -1)
+            move = true;
+            x = e.X;
+            y = e.Y;
+            xSt = e.X;
+            ySt = e.Y;
+        }
+
+        private void pictureBox4_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (move && x != -1 && y != -1)
             {
-                graphics.DrawLine(pen, new Point(x, y), e.Location);
+                if (drawingMode == 1)
+                {
+                    graphics.DrawLine(pen, new Point(x, y), e.Location);
+
+                } else if (drawingMode == 5)
+                {
+                    
+                    graphics.DrawLine(eraser, new Point(x, y), e.Location);
+                }
+
+            }
+            box.Refresh();
+
+            x2 = e.X - xSt;
+            y2 = e.Y - ySt;
+            x = e.X;
+            y = e.Y;
+        }
+
+        private void pictureBox4_MouseUp(object sender, MouseEventArgs e)
+        {
+            move = false;
+            x2 = x - xSt;
+            y2 = y - ySt;
+            if (drawingMode == 2)
+            {
+                graphics.DrawRectangle(pen, xSt, ySt, x2, y2);
+            }
+            else if (drawingMode == 3)
+            {
+                graphics.DrawEllipse(pen, xSt, ySt, x2, y2);
+            }
+            else if (drawingMode == 4)
+            {
+                graphics.DrawLine(pen, xSt, ySt, x, y);
+            }
+
+            x = -1;
+            y = -1;
+        }
+
+        private void box_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics graphics = e.Graphics;
+            if (move)
+            {
+                if (drawingMode == 2)
+                {
+                    graphics.DrawRectangle(pen, xSt, ySt, x2, y2);
+                }
+                else if (drawingMode == 3)
+                {
+                    graphics.DrawEllipse(pen, xSt, ySt, x2, y2);
+                }
+                else if (drawingMode == 4)
+                {
+                    graphics.DrawLine(pen, xSt, ySt, x, y);
+                }
+            }
+        }
+
+        /*private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (move && x != -1 && y != -1)
+            {
+                if(drawingMode == 1) {
+                    graphics.DrawLine(pen, new Point(x, y), e.Location);
+                    
+                }
+                x2 = e.X - xSt;
+                y2 = e.Y - ySt;
                 x = e.X;
                 y = e.Y;
+
             }
         }
 
         private void panel1_MouseUp(object sender, MouseEventArgs e)
         {
             move = false;
+            x2 = x - xSt;
+            y2 = y - ySt;
+            drawingMode = 3;
+            if (drawingMode == 2)
+            {
+                graphics.DrawRectangle(pen, xSt, ySt, x2, y2);
+            } else if (drawingMode == 3)
+            {
+                graphics.DrawEllipse(pen, xSt, ySt, x2, y2);
+            } else if (drawingMode == 4)
+            {
+                graphics.DrawLine(pen, xSt, ySt, x, y);
+            }
+
             x = -1;
             y = -1;
         }
 
-        private void CalculatorRevisited_Load(object sender, EventArgs e)
-        {
-
-        }
+        
 
 
         private void panel1_MouseDown(object sender, MouseEventArgs e)
         {
             move = true;
-            x = e.X; 
+            x = e.X;
             y = e.Y;
+            xSt = e.X;
+            ySt = e.Y;
         }
+
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics graphics = e.Graphics;
+            if (move)
+            {
+                if (drawingMode == 2)
+                {
+                    graphics.DrawRectangle(pen, xSt, ySt, x2, y2);
+                }
+                else if (drawingMode == 3)
+                {
+                    graphics.DrawEllipse(pen, xSt, ySt, x2, y2);
+                }
+                else if (drawingMode == 4)
+                {
+                    graphics.DrawLine(pen, xSt, ySt, x, y);
+                }
+            }
+        }*/
     }
 }
