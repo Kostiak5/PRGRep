@@ -1,6 +1,6 @@
 ﻿namespace CalculatorRevisited
 {
-    partial class CalculatorRevisited
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -44,17 +45,20 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.label2 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonClear = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.buttonFill = new System.Windows.Forms.Button();
-            this.buttonBorder = new System.Windows.Forms.Button();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.buttonImage = new System.Windows.Forms.Button();
+            this.textBoxColor = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -122,6 +126,7 @@
             this.box.TabIndex = 5;
             this.box.TabStop = false;
             this.box.Paint += new System.Windows.Forms.PaintEventHandler(this.box_Paint);
+            this.box.MouseClick += new System.Windows.Forms.MouseEventHandler(this.box_MouseClick);
             this.box.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox4_MouseDown);
             this.box.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox4_MouseMove);
             this.box.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox4_MouseUp);
@@ -220,22 +225,23 @@
             // 
             // button4
             // 
+            this.button4.BackColor = System.Drawing.Color.Gainsboro;
             this.button4.ForeColor = System.Drawing.Color.Black;
             this.button4.Location = new System.Drawing.Point(330, 20);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(101, 42);
             this.button4.TabIndex = 15;
             this.button4.Text = "Straight Line";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel1.Controls.Add(this.button5);
+            this.panel1.Controls.Add(this.textBoxColor);
+            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.trackBar1);
-            this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.pictureBox10);
             this.panel1.Controls.Add(this.pictureBox9);
             this.panel1.Controls.Add(this.pictureBox8);
@@ -251,17 +257,13 @@
             this.panel1.Size = new System.Drawing.Size(688, 56);
             this.panel1.TabIndex = 16;
             // 
-            // button5
+            // label4
             // 
-            this.button5.BackColor = System.Drawing.Color.White;
-            this.button5.ForeColor = System.Drawing.Color.Red;
-            this.button5.Location = new System.Drawing.Point(369, 21);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(88, 30);
-            this.button5.TabIndex = 20;
-            this.button5.Text = "Erase";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(65, 5);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(0, 13);
+            this.label4.TabIndex = 20;
             // 
             // label3
             // 
@@ -287,17 +289,18 @@
             this.trackBar1.Value = 5;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
-            // label2
+            // button5
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(9, 5);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "COLOR";
+            this.button5.BackColor = System.Drawing.Color.White;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.ForeColor = System.Drawing.Color.Red;
+            this.button5.Location = new System.Drawing.Point(107, 20);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(95, 34);
+            this.button5.TabIndex = 20;
+            this.button5.Text = "Erase";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // panel2
             // 
@@ -310,7 +313,7 @@
             this.panel2.ForeColor = System.Drawing.Color.Transparent;
             this.panel2.Location = new System.Drawing.Point(15, 36);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(441, 66);
+            this.panel2.Size = new System.Drawing.Size(439, 66);
             this.panel2.TabIndex = 17;
             // 
             // label1
@@ -319,19 +322,18 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(9, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.Size = new System.Drawing.Size(56, 13);
             this.label1.TabIndex = 16;
-            this.label1.Text = "MODE";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.label1.Text = "SHAPES";
             // 
             // buttonClear
             // 
             this.buttonClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.buttonClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonClear.ForeColor = System.Drawing.Color.Red;
-            this.buttonClear.Location = new System.Drawing.Point(462, 36);
+            this.buttonClear.Location = new System.Drawing.Point(709, 108);
             this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(241, 62);
+            this.buttonClear.Size = new System.Drawing.Size(138, 56);
             this.buttonClear.TabIndex = 18;
             this.buttonClear.Text = "Clear";
             this.buttonClear.UseVisualStyleBackColor = false;
@@ -340,63 +342,85 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel3.Controls.Add(this.buttonBorder);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Controls.Add(this.button5);
             this.panel3.Controls.Add(this.buttonFill);
-            this.panel3.Controls.Add(this.textBox1);
             this.panel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.panel3.Location = new System.Drawing.Point(709, 36);
+            this.panel3.Location = new System.Drawing.Point(460, 36);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(209, 128);
+            this.panel3.Size = new System.Drawing.Size(313, 66);
             this.panel3.TabIndex = 19;
             // 
-            // textBox1
+            // label5
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.ForeColor = System.Drawing.Color.White;
-            this.textBox1.Location = new System.Drawing.Point(4, 4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(212, 13);
-            this.textBox1.TabIndex = 0;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(3, 4);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 13);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "MODE";
             // 
             // buttonFill
             // 
-            this.buttonFill.BackColor = System.Drawing.Color.Gray;
+            this.buttonFill.BackColor = System.Drawing.Color.Gainsboro;
             this.buttonFill.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.buttonFill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonFill.ForeColor = System.Drawing.Color.Gray;
-            this.buttonFill.Location = new System.Drawing.Point(4, 33);
+            this.buttonFill.ForeColor = System.Drawing.Color.Black;
+            this.buttonFill.Location = new System.Drawing.Point(6, 20);
             this.buttonFill.Name = "buttonFill";
-            this.buttonFill.Size = new System.Drawing.Size(97, 33);
+            this.buttonFill.Size = new System.Drawing.Size(95, 34);
             this.buttonFill.TabIndex = 1;
             this.buttonFill.Text = "Fill";
             this.buttonFill.UseVisualStyleBackColor = false;
             this.buttonFill.Click += new System.EventHandler(this.buttonFill_Click);
             // 
-            // buttonBorder
+            // notifyIcon1
             // 
-            this.buttonBorder.BackColor = System.Drawing.Color.Gray;
-            this.buttonBorder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonBorder.ForeColor = System.Drawing.Color.Gray;
-            this.buttonBorder.Location = new System.Drawing.Point(107, 33);
-            this.buttonBorder.Name = "buttonBorder";
-            this.buttonBorder.Size = new System.Drawing.Size(97, 33);
-            this.buttonBorder.TabIndex = 2;
-            this.buttonBorder.Text = "Border color";
-            this.buttonBorder.UseVisualStyleBackColor = false;
-            this.buttonBorder.Click += new System.EventHandler(this.buttonBorder_Click);
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
             // 
-            // CalculatorRevisited
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // buttonImage
+            // 
+            this.buttonImage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonImage.ForeColor = System.Drawing.Color.White;
+            this.buttonImage.Location = new System.Drawing.Point(779, 36);
+            this.buttonImage.Name = "buttonImage";
+            this.buttonImage.Size = new System.Drawing.Size(68, 66);
+            this.buttonImage.TabIndex = 20;
+            this.buttonImage.Text = "Add Image";
+            this.buttonImage.UseVisualStyleBackColor = false;
+            this.buttonImage.Click += new System.EventHandler(this.buttonImage_Click);
+            // 
+            // textBoxColor
+            // 
+            this.textBoxColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxColor.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxColor.ForeColor = System.Drawing.Color.Black;
+            this.textBoxColor.Location = new System.Drawing.Point(8, 5);
+            this.textBoxColor.Name = "textBoxColor";
+            this.textBoxColor.Size = new System.Drawing.Size(99, 13);
+            this.textBoxColor.TabIndex = 21;
+            this.textBoxColor.Text = "Color [Black]";
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1462, 957);
+            this.ClientSize = new System.Drawing.Size(1081, 957);
+            this.Controls.Add(this.buttonImage);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.box);
-            this.Name = "CalculatorRevisited";
+            this.Name = "MainForm";
+            this.Tag = "S";
             this.Text = "Calculator Revisited";
             this.Load += new System.EventHandler(this.CalculatorRevisited_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.CalculatorRevisited_Paint);
@@ -442,14 +466,17 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button buttonBorder;
         private System.Windows.Forms.Button buttonFill;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button buttonImage;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxColor;
     }
 }
 

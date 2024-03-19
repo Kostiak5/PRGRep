@@ -11,17 +11,20 @@ using System.Windows.Forms;
 
 namespace CalculatorRevisited
 {
-    public partial class CalculatorRevisited : Form
+    public partial class MainForm : Form
     {
         Graphics graphics;
-        Bitmap bitmap;
+        Bitmap bitmap, imageBitmap;
         int x = -1, y = -1, x2 = -1, y2 = -1, xSt = -1, ySt = -1;
-        int savedXSt = 10, savedYSt = 10, savedXEnd = 10, savedYEnd = 10;
+        public static int imgWidth = 0, imgHeight = 0;
         int drawingMode = 1;
+        bool imageInsertion = false;
         bool move = false;
+
         Pen pen, eraser;
         Brush brush;
-        public CalculatorRevisited()
+        Color color;
+        public MainForm()
         {
             InitializeComponent();
             this.Width = 900;
@@ -55,13 +58,18 @@ namespace CalculatorRevisited
             PictureBox p = (PictureBox)sender;
             pen.Color = p.BackColor;
             ((SolidBrush)brush).Color = p.BackColor;
+            color = p.BackColor;
+            textBoxColor.ForeColor = p.BackColor;
+            textBoxColor.Text = Convert.ToString(p.BackColor);
         }
         private void pictureBox2_Click(object sender, EventArgs e)
         {
             PictureBox p = (PictureBox)sender;
             pen.Color = p.BackColor;
-            brush = new SolidBrush(p.BackColor);
             ((SolidBrush)brush).Color = p.BackColor;
+            color = p.BackColor;
+            textBoxColor.ForeColor = p.BackColor;
+            textBoxColor.Text = Convert.ToString(p.BackColor);
         }
 
         private void pictureBox6_Click(object sender, EventArgs e)
@@ -69,6 +77,9 @@ namespace CalculatorRevisited
             PictureBox p = (PictureBox)sender;
             pen.Color = p.BackColor;
             ((SolidBrush)brush).Color = p.BackColor;
+            color = p.BackColor;
+            textBoxColor.ForeColor = p.BackColor;
+            textBoxColor.Text = Convert.ToString(p.BackColor);
         }
 
         private void pictureBox10_Click(object sender, EventArgs e)
@@ -76,6 +87,9 @@ namespace CalculatorRevisited
             PictureBox p = (PictureBox)sender;
             pen.Color = p.BackColor;
             ((SolidBrush)brush).Color = p.BackColor;
+            color = p.BackColor;
+            textBoxColor.ForeColor = p.BackColor;
+            textBoxColor.Text = Convert.ToString(p.BackColor);
         }
 
         private void pictureBox4_Click(object sender, EventArgs e)
@@ -83,6 +97,9 @@ namespace CalculatorRevisited
             PictureBox p = (PictureBox)sender;
             pen.Color = p.BackColor;
             ((SolidBrush)brush).Color = p.BackColor;
+            color = p.BackColor;
+            textBoxColor.ForeColor = p.BackColor;
+            textBoxColor.Text = Convert.ToString(p.BackColor);
         }
 
         private void pictureBox8_Click(object sender, EventArgs e)
@@ -90,6 +107,9 @@ namespace CalculatorRevisited
             PictureBox p = (PictureBox)sender;
             pen.Color = p.BackColor;
             ((SolidBrush)brush).Color = p.BackColor;
+            color = p.BackColor;
+            textBoxColor.ForeColor = p.BackColor;
+            textBoxColor.Text = "Color [Light Blue]"; //the system name DeepSkyBlue looks bad so I just replaced it manually
         }
 
         private void pictureBox5_Click(object sender, EventArgs e)
@@ -97,6 +117,9 @@ namespace CalculatorRevisited
             PictureBox p = (PictureBox)sender;
             pen.Color = p.BackColor;
             ((SolidBrush)brush).Color = p.BackColor;
+            color = p.BackColor;
+            textBoxColor.ForeColor = p.BackColor;
+            textBoxColor.Text = Convert.ToString(p.BackColor);
         }
 
         private void pictureBox9_Click(object sender, EventArgs e)
@@ -104,6 +127,9 @@ namespace CalculatorRevisited
             PictureBox p = (PictureBox)sender;
             pen.Color = p.BackColor;
             ((SolidBrush)brush).Color = p.BackColor;
+            color = p.BackColor;
+            textBoxColor.ForeColor = p.BackColor;
+            textBoxColor.Text = Convert.ToString(p.BackColor);
         }
 
         private void pictureBox7_Click(object sender, EventArgs e)
@@ -111,6 +137,18 @@ namespace CalculatorRevisited
             PictureBox p = (PictureBox)sender;
             pen.Color = p.BackColor;
             ((SolidBrush)brush).Color = p.BackColor;
+            color = p.BackColor;
+            textBoxColor.ForeColor = p.BackColor;
+            textBoxColor.Text = Convert.ToString(p.BackColor);
+        }
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            PictureBox p = (PictureBox)sender;
+            pen.Color = p.BackColor;
+            ((SolidBrush)brush).Color = p.BackColor;
+            color = p.BackColor;
+            textBoxColor.ForeColor = p.BackColor;
+            textBoxColor.Text = Convert.ToString(p.BackColor);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -144,46 +182,94 @@ namespace CalculatorRevisited
 
         }
 
+        private void box_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(imageInsertion)
+            {
+                graphics.DrawImage(imageBitmap, e.Location.X, e.Location.Y, imgWidth, imgHeight);
+                imageInsertion = false;
+            } 
+            else if(drawingMode == 6)
+            {
+                fill(bitmap, e.Location.X, e.Location.Y, color);
+            }
+        }
+
         private void buttonClear_Click(object sender, EventArgs e)
         {
             bitmap = new Bitmap(box.Width, box.Height);
             graphics = Graphics.FromImage(bitmap);
-            graphics.Clear(Color.White);
+            graphics.Clear(Color.Transparent);
             box.Image = bitmap;
+        }
+
+
+        public void buttonImage_Click(object sender, EventArgs e)
+        {
+            if(openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                imageBitmap = new Bitmap(openFileDialog1.FileName);
+
+                ImageForm imageForm = new ImageForm(imageBitmap.Width, imageBitmap.Height);
+                imageForm.ShowDialog();
+
+                imageInsertion = true;
+            }
+        }
+
+        static void fillingProcess(Bitmap bitmap, int xF, int yF, Color newColor, Color originalColor, Stack<Point> pointStack)
+        {
+            bitmap.SetPixel(xF, yF, newColor);
+            pointStack.Push(new Point(xF, yF));
+            return;
+        }
+
+        static void fill(Bitmap bitmap, int xF, int yF, Color newColor)
+        {
+            Stack<Point> pointStack = new Stack<Point>();
+            pointStack.Push(new Point(xF, yF));
+
+            Color originalColor = bitmap.GetPixel(xF, yF);
+            fillingProcess(bitmap, xF, yF, newColor, originalColor, pointStack);
+
+            if(originalColor == newColor)
+            {
+                return;
+            }
+
+            while(pointStack.Count > 0) //basically a BFS
+            {
+                Point currentPoint = (Point)pointStack.Pop();
+                xF = currentPoint.X;
+                yF = currentPoint.Y;
+                if (xF < bitmap.Width - 1 && bitmap.GetPixel(xF + 1, yF) == originalColor)
+                {
+                    fillingProcess(bitmap, xF + 1, yF, newColor, originalColor, pointStack);
+                }
+                if (xF > 0 && bitmap.GetPixel(xF - 1, yF) == originalColor)
+                {
+                    fillingProcess(bitmap, xF - 1, yF, newColor, originalColor, pointStack);
+                }
+                if (yF < bitmap.Height - 1 && bitmap.GetPixel(xF, yF + 1) == originalColor)
+                {
+                    fillingProcess(bitmap, xF, yF + 1, newColor, originalColor, pointStack);
+                }
+                if (yF > 0 && bitmap.GetPixel(xF, yF - 1) == originalColor)
+                {
+                    fillingProcess(bitmap, xF, yF - 1, newColor, originalColor, pointStack);
+                }
+            }
         }
 
         private void buttonFill_Click(object sender, EventArgs e)
         {
-            //graphics.FillRectangle(new SolidBrush(Color.Yellow), savedXSt, savedYSt, savedXEnd, savedYEnd);
-            if (drawingMode == 2)
-            {
-                graphics.FillRectangle(new SolidBrush(Color.Yellow), savedXSt, savedYSt, savedXEnd, savedYEnd);
-            }
-            else if (drawingMode == 3)
-            {
-                graphics.FillEllipse(brush, xSt, ySt, x2, y2);
-            }
-            else if (drawingMode == 4)
-            {
-                graphics.DrawLine(pen, xSt, ySt, x, y);
-            }
-        }
-
-        private void buttonBorder_Click(object sender, EventArgs e)
-        {
-
+            drawingMode = 6;
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             drawingMode = 5;
             
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-            PictureBox p = (PictureBox)sender;
-            pen.Color = p.BackColor;
         }
 
         private void pictureBox4_MouseDown(object sender, MouseEventArgs e)
@@ -210,6 +296,7 @@ namespace CalculatorRevisited
                 }
 
             }
+            //
             box.Refresh();
 
             x2 = e.X - xSt;
@@ -226,27 +313,14 @@ namespace CalculatorRevisited
             if (drawingMode == 2)
             {
                 graphics.DrawRectangle(pen, xSt, ySt, x2, y2);
-                textBox1.Text = "Edit the newly created rectangle:";
-                textBox1.Text = Convert.ToString(x2);
-                buttonFill.ForeColor = Color.Black;
-                buttonFill.BackColor = Color.White;
-                buttonBorder.BackColor = Color.White;
-                buttonBorder.ForeColor = Color.Black;
-
-                savedXSt = xSt;
-                savedYSt = ySt;
-                savedXEnd = x2;
-                savedYEnd = y2;
             }
             else if (drawingMode == 3)
             {
                 graphics.DrawEllipse(pen, xSt, ySt, x2, y2);
-                textBox1.Text = "Edit the newly created ellipse:";
             }
             else if (drawingMode == 4)
             {
                 graphics.DrawLine(pen, xSt, ySt, x, y);
-                textBox1.Text = "Edit the newly created line:";
             }
         }
 
