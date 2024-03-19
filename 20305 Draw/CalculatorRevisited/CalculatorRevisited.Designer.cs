@@ -44,13 +44,17 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.buttonClear = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.buttonFill = new System.Windows.Forms.Button();
+            this.buttonBorder = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -63,8 +67,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -246,6 +251,54 @@
             this.panel1.Size = new System.Drawing.Size(688, 56);
             this.panel1.TabIndex = 16;
             // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.White;
+            this.button5.ForeColor = System.Drawing.Color.Red;
+            this.button5.Location = new System.Drawing.Point(369, 21);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(88, 30);
+            this.button5.TabIndex = 20;
+            this.button5.Text = "Erase";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(502, 5);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 13);
+            this.label3.TabIndex = 19;
+            this.label3.Text = "THICKNESS";
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.trackBar1.Location = new System.Drawing.Point(573, 11);
+            this.trackBar1.Maximum = 25;
+            this.trackBar1.Minimum = 1;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(112, 45);
+            this.trackBar1.TabIndex = 18;
+            this.trackBar1.Value = 5;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(9, 5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "COLOR";
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -260,18 +313,6 @@
             this.panel2.Size = new System.Drawing.Size(441, 66);
             this.panel2.TabIndex = 17;
             // 
-            // trackBar1
-            // 
-            this.trackBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.trackBar1.Location = new System.Drawing.Point(573, 11);
-            this.trackBar1.Maximum = 25;
-            this.trackBar1.Minimum = 1;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(112, 45);
-            this.trackBar1.TabIndex = 18;
-            this.trackBar1.Value = 5;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -282,42 +323,6 @@
             this.label1.TabIndex = 16;
             this.label1.Text = "MODE";
             this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(9, 5);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "COLOR";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(502, 5);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 13);
-            this.label3.TabIndex = 19;
-            this.label3.Text = "THICKNESS";
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.White;
-            this.button5.ForeColor = System.Drawing.Color.Red;
-            this.button5.Location = new System.Drawing.Point(369, 21);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(88, 30);
-            this.button5.TabIndex = 20;
-            this.button5.Text = "Erase";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // buttonClear
             // 
@@ -332,11 +337,61 @@
             this.buttonClear.UseVisualStyleBackColor = false;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel3.Controls.Add(this.buttonBorder);
+            this.panel3.Controls.Add(this.buttonFill);
+            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel3.Location = new System.Drawing.Point(709, 36);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(209, 128);
+            this.panel3.TabIndex = 19;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.ForeColor = System.Drawing.Color.White;
+            this.textBox1.Location = new System.Drawing.Point(4, 4);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(212, 13);
+            this.textBox1.TabIndex = 0;
+            // 
+            // buttonFill
+            // 
+            this.buttonFill.BackColor = System.Drawing.Color.Gray;
+            this.buttonFill.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonFill.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonFill.ForeColor = System.Drawing.Color.Gray;
+            this.buttonFill.Location = new System.Drawing.Point(4, 33);
+            this.buttonFill.Name = "buttonFill";
+            this.buttonFill.Size = new System.Drawing.Size(97, 33);
+            this.buttonFill.TabIndex = 1;
+            this.buttonFill.Text = "Fill";
+            this.buttonFill.UseVisualStyleBackColor = false;
+            this.buttonFill.Click += new System.EventHandler(this.buttonFill_Click);
+            // 
+            // buttonBorder
+            // 
+            this.buttonBorder.BackColor = System.Drawing.Color.Gray;
+            this.buttonBorder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonBorder.ForeColor = System.Drawing.Color.Gray;
+            this.buttonBorder.Location = new System.Drawing.Point(107, 33);
+            this.buttonBorder.Name = "buttonBorder";
+            this.buttonBorder.Size = new System.Drawing.Size(97, 33);
+            this.buttonBorder.TabIndex = 2;
+            this.buttonBorder.Text = "Border color";
+            this.buttonBorder.UseVisualStyleBackColor = false;
+            this.buttonBorder.Click += new System.EventHandler(this.buttonBorder_Click);
+            // 
             // CalculatorRevisited
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1462, 957);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -358,9 +413,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -389,6 +446,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button buttonClear;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button buttonBorder;
+        private System.Windows.Forms.Button buttonFill;
     }
 }
 
