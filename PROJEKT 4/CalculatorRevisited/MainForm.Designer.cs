@@ -45,6 +45,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBoxColor = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
@@ -58,7 +59,7 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.buttonImage = new System.Windows.Forms.Button();
-            this.textBoxColor = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -125,6 +126,7 @@
             this.box.Size = new System.Drawing.Size(1450, 467);
             this.box.TabIndex = 5;
             this.box.TabStop = false;
+            this.box.Click += new System.EventHandler(this.box_Click);
             this.box.Paint += new System.Windows.Forms.PaintEventHandler(this.box_Paint);
             this.box.MouseClick += new System.Windows.Forms.MouseEventHandler(this.box_MouseClick);
             this.box.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox4_MouseDown);
@@ -256,6 +258,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(688, 56);
             this.panel1.TabIndex = 16;
+            // 
+            // textBoxColor
+            // 
+            this.textBoxColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.textBoxColor.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxColor.ForeColor = System.Drawing.Color.Black;
+            this.textBoxColor.Location = new System.Drawing.Point(8, 5);
+            this.textBoxColor.Name = "textBoxColor";
+            this.textBoxColor.Size = new System.Drawing.Size(99, 13);
+            this.textBoxColor.TabIndex = 21;
+            this.textBoxColor.Text = "Color [Black]";
             // 
             // label4
             // 
@@ -396,23 +410,20 @@
             this.buttonImage.UseVisualStyleBackColor = false;
             this.buttonImage.Click += new System.EventHandler(this.buttonImage_Click);
             // 
-            // textBoxColor
+            // textBox1
             // 
-            this.textBoxColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.textBoxColor.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxColor.ForeColor = System.Drawing.Color.Black;
-            this.textBoxColor.Location = new System.Drawing.Point(8, 5);
-            this.textBoxColor.Name = "textBoxColor";
-            this.textBoxColor.Size = new System.Drawing.Size(99, 13);
-            this.textBoxColor.TabIndex = 21;
-            this.textBoxColor.Text = "Color [Black]";
+            this.textBox1.Location = new System.Drawing.Point(854, 129);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 21;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1081, 957);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.buttonImage);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.buttonClear);
@@ -443,6 +454,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -477,6 +489,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxColor;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

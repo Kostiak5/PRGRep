@@ -23,7 +23,7 @@ namespace CalculatorRevisited
 
         Pen pen, eraser;
         Brush brush;
-        Color color;
+        Color color = Color.Black;
         public MainForm()
         {
             InitializeComponent();
@@ -191,7 +191,8 @@ namespace CalculatorRevisited
             } 
             else if(drawingMode == 6)
             {
-                fill(bitmap, e.Location.X, e.Location.Y, color);
+                if(!color.ToArgb().Equals(bitmap.GetPixel(e.Location.X,e.Location.Y).ToArgb()))
+                    fill(bitmap, e.Location.X, e.Location.Y, color);
             }
         }
 
@@ -217,6 +218,16 @@ namespace CalculatorRevisited
             }
         }
 
+        private void box_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         static void fillingProcess(Bitmap bitmap, int xF, int yF, Color newColor, Color originalColor, Stack<Point> pointStack)
         {
             bitmap.SetPixel(xF, yF, newColor);
@@ -226,13 +237,12 @@ namespace CalculatorRevisited
 
         static void fill(Bitmap bitmap, int xF, int yF, Color newColor)
         {
+            Color originalColor = bitmap.GetPixel(xF, yF);
             Stack<Point> pointStack = new Stack<Point>();
             pointStack.Push(new Point(xF, yF));
-
-            Color originalColor = bitmap.GetPixel(xF, yF);
-            fillingProcess(bitmap, xF, yF, newColor, originalColor, pointStack);
-
-            if(originalColor == newColor)
+            
+            bitmap.SetPixel(xF, yF, newColor);
+            if(newColor == originalColor)
             {
                 return;
             }
