@@ -59,7 +59,6 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.buttonImage = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -410,20 +409,11 @@
             this.buttonImage.UseVisualStyleBackColor = false;
             this.buttonImage.Click += new System.EventHandler(this.buttonImage_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(854, 129);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 21;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1081, 957);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.buttonImage);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.buttonClear);
@@ -454,7 +444,6 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -489,7 +478,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxColor;
-        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
