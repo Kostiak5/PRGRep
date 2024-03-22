@@ -200,7 +200,7 @@ namespace CalculatorRevisited
         {
             bitmap = new Bitmap(box.Width, box.Height);
             graphics = Graphics.FromImage(bitmap);
-            graphics.Clear(Color.Transparent);
+            graphics.Clear(Color.White);
             box.Image = bitmap;
         }
 
